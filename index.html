@@ -20,16 +20,34 @@
 <body>
 	<div id="map" class="map"></div>
 	<script type="text/javascript">
+	var areaLayer = new ol.layer.Vector({
+		source: new ol.source.Vector({
+			url: 'area.json',
+			format: new ol.format.GeoJSON()
+		}),
+		style: function() {
+			return [new ol.style.Style({
+				fill: new ol.style.Fill({
+					color: 'rgba(255, 255, 255, 0.6)'
+				}),
+				stroke: new ol.style.Stroke({
+					color: '#319FD3',
+					width: 1
+				})
+			})];
+		}
+	});
 	var map = new ol.Map({
 	target: 'map',
 		layers: [
-		  new ol.layer.Tile({
-		    source: new ol.source.OSM()
-		  })
+			new ol.layer.Tile({
+				source: new ol.source.OSM()
+			}),
+			areaLayer
 		],
 		view: new ol.View({
-		  center: ol.proj.fromLonLat([120.5411994, 23.708]),
-		  zoom: 15
+			center: ol.proj.fromLonLat([120.5411994, 23.708]),
+			zoom: 15
 		})
 	});
 	</script>
